@@ -3,8 +3,8 @@ html(ng-app)
     head
         meta(charset="UTF-8")
         title jade!
-        script(src="require.js")
 
     body
-        | {{hello}}
-        |{{hello = 3}}
+        ng-view
+
+    script(src="require.js")

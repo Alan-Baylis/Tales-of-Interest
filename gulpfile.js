@@ -6,7 +6,7 @@ const jade = require('gulp-jade');
 const child_process = require('child_process');
 let child;
 
-gulp.task('default', ['server', 'client']);
+gulp.task('default', ['client']);
 
 gulp.task('watch', ['server-watch', 'client-watch']);
 
@@ -18,7 +18,7 @@ gulp.task('server', () => {
   child = child_process.fork('./server/index.js');
 });
 
-gulp.task('server-watch', () => {
+gulp.task('server-watch', ['server'], () => {
   return gulp.watch(['./server/*.js', './server/**/*.js'], ['server']);
 });
 
@@ -26,7 +26,7 @@ gulp.task('server-watch', () => {
 
 gulp.task('client', ['compile-js', 'compile-jade']);
 
-gulp.task('client-watch', ['compile-js', 'compile-jade'], () => {
+gulp.task('client-watch', ['client'], () => {
   gulp.watch('./client/**/*.js', ['compile-js']);
   gulp.watch('./client/**/*.jade', ['compile-jade']);
 });
@@ -34,7 +34,7 @@ gulp.task('client-watch', ['compile-js', 'compile-jade'], () => {
 //js
 
 gulp.task('compile-js', () => {
-  return gulp.src('./client/js/index.js')
+  return gulp.src('./client/js/app.js')
     .pipe(webpack({output: {filename: 'require.js'}}))
     .pipe(gulp.dest('./public'));
 });
@@ -42,7 +42,7 @@ gulp.task('compile-js', () => {
 //jade
 
 gulp.task('compile-jade', () => {
-  return gulp.src(['./client/jade/*.jade', './client/jade/**/*.jade'])
-    .pipe(jade())
+  return gulp.src(['./client/jade/**/*.jade'])
+    .pipe(jade({pretty: true}))
     .pipe(gulp.dest('./public'));
 });
