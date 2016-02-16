@@ -1,8 +1,8 @@
 'use strict';
 
 const gulp = /**@type {gulp}*/ require('gulp');
-const webpack = require('webpack-stream');
 const jade = require('gulp-jade');
+const browserify = require('gulp-browserify');
 const child_process = require('child_process');
 let child;
 
@@ -35,7 +35,7 @@ gulp.task('client-watch', ['client'], () => {
 
 gulp.task('compile-js', () => {
   return gulp.src('./client/js/app.js')
-    .pipe(webpack({output: {filename: 'require.js'}}))
+    .pipe(browserify())
     .pipe(gulp.dest('./public'));
 });
 
