@@ -1,9 +1,7 @@
 'use strict';
 
 const angular = /**@type {angular}*/ require('angular');
-console.log('required');
-const mainCtrl = require('./main-ctrl');
 
-angular
-  .module('main', [])
-  .controller('mainCtrl', mainCtrl);
+const app = angular.module('main', []);
+
+require('./main-ctrl')(app);

@@ -1,8 +1,12 @@
 'use strict';
 
-module.exports = function($scope) {
-  $scope.test = 'test';
-  console.log('loaded!');
-};
+/**
+ * @param {angular.IModule} app
+ */
+module.exports = function(app) {
+  app.controller('mainCtrl', mainCtrl);
 
-console.log('hi!');
+  function mainCtrl($scope) {
+    $scope.test = 'testers!';
+  }
+};
