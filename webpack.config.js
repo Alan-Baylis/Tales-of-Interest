@@ -10,12 +10,9 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.css$/, loader: 'style!css'},
-      { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.eot$|\.woff2$/, loader: 'file?name=[name].[ext]' },
+      {test: /\.scss$/, loader: `style!css!sass`},
+      {test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.eot$|\.woff2$/, loader: 'file?name=[name].[ext]!url'},
       {test: /\.jade/, loader: 'file?name=[name].html!jade-html?pretty'}
     ]
-  },
-  jadeLoader: {
-    pretty: true,
-    basedir: '/'
   }
 };

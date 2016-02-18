@@ -1,13 +1,8 @@
 'use strict';
 
-//require('./index.jade');
-const angular = /**@type {angular}*/ require('angular');
-
-//my code
 require(__dirname + '/index.jade');
-
+const angular = /**@type {angular}*/ require('angular');
 const app = angular.module('toi', ['ngRoute']);
-
 const mainCtrl = require(__dirname + '/main/main-ctrl')(app);
 
 
