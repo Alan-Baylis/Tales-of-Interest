@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack"
   },
   "keywords": [],
   "author": "Luis Chapman",
@@ -12,10 +13,19 @@
   "dependencies": {
     "angular": "~1.5.0",
     "angular-route": "~1.5.0",
+    "apply": "0.0.0",
+    "bootstrap": "~3.3.6",
+    "css-loader": "~0.23.1",
     "express": "~4.13.4",
+    "file-loader": "~0.8.5",
     "gulp": "~3.9.1",
     "gulp-browserify": "~0.5.1",
     "gulp-inject": "~3.0.0",
-    "gulp-jade": "~1.1.0"
+    "gulp-jade": "~1.1.0",
+    "jade-html-loader": "0.0.3",
+    "jade-loader": "~0.8.0",
+    "jquery": "~2.2.0",
+    "style-loader": "~0.13.0",
+    "webpack": "~1.12.13"
   }
 }

@@ -34,7 +34,7 @@ gulp.task('client-watch', ['client'], () => {
 
 //js
 
-gulp.task('js', ['legacy-js'], () => {
+gulp.task('js', /*['legacy-js'],*/ () => {
   return gulp.src('./client/js/app.js')
     .pipe(browserify())
     .pipe(gulp.dest('./public'));
