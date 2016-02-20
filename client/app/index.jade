@@ -1,10 +1,23 @@
 doctype html
 html(ng-app='toi')
-    head
-        meta(charset="UTF-8")
-        title Tales of Interest!
+  head
+    meta(charset='UTF-8', name='viewport', content='width=device-width, initial-scale=1')
+    title Tales of Interest!
 
-    body
-        ng-view
+  body
+    .container-fluid
+      .navbar.navbar-default.navbar-fixed-top
+        .container-fluid
+          .navbar-header.title
+            h4.pull-left Tales of Interest
 
-        script(src="require.js")
+            button.btn.btn-default.navbar-btn.pull-right
+              span.glyphicon.glyphicon-search
+
+            button.btn.btn-default.navbar-btn.pull-right
+              span.glyphicon.glyphicon-list
+
+      .title-spacer
+      div(ng-view).index-view
+
+    script(src='require.js')
