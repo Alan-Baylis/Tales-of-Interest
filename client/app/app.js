@@ -4,7 +4,7 @@ require(__dirname + '/index.jade');
 require(__dirname + '/index.scss');
 const angular = /**@type {angular}*/ require('angular');
 const app = angular.module('toi', ['ngRoute']);
-const mainCtrl = require(__dirname + '/main/main-ctrl')(app);
+const mainCtrl = require(__dirname + '/views/main/main-ctrl')(app);
 
 
 app.config(($locationProvider, $routeProvider) => {
