@@ -9,13 +9,14 @@ html(ng-app='toi')
       .navbar.navbar-default.navbar-fixed-top
         .container-fluid
           .navbar-header.header
-            h4.pull-left Tales of Interest
-
-            button.btn.btn-default.navbar-btn.pull-right
-              span.glyphicon.glyphicon-list
-
-            button.btn.btn-default.navbar-btn.pull-right
+            button.btn.btn-default.navbar-btn.left
               span.glyphicon.glyphicon-search
+
+            .middle
+              h4 Tales of Interest
+
+            button.btn.btn-default.navbar-btn.right
+              span.glyphicon.glyphicon-list
 
       .title-spacer
       div(ng-view).index-view

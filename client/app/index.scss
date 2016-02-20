@@ -1,4 +1,23 @@
 .header {
+  position: relative;
+
+  .left {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .middle {
+    width: 100%;
+    text-align: center;
+  }
+
+  .right {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
   h4 {
     padding-left: 10px;
     letter-spacing: 2px;
@@ -10,5 +29,5 @@
 }
 
 .title-spacer {
-  height: 75px;
+  height: 30px;
 }
