@@ -2,8 +2,7 @@
 
 require(__dirname + '/history-panel.scss');
 require(__dirname + '/history-panel.jade');
-const storyHistory = /**@type {StoryHistory}*/ require('../../lib/story-history')();
-const $ = require('jquery');
+const storyHistory = /**@type {StoryHistory}*/ require('../../services/story-history')();
 
 /**
  * @param {angular.IModule} app
