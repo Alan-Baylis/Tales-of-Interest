@@ -9,19 +9,23 @@ html(ng-app='toi')
       .navbar.navbar-default.navbar-fixed-top
         .container-fluid
           .navbar-header.header
-            button.btn.btn-default.navbar-btn.left
-              span.glyphicon.glyphicon-search
+
+            button(ng-click="showSearch = !showSearch").btn.btn-default.navbar-btn.left
+              span(ng-if="!showSearch").glyphicon.glyphicon-search
+              span(ng-if="showSearch").glyphicon.glyphicon-remove.text-danger
 
             .middle
               h4 Tales of Interest
 
             button(ng-click="showHistory = !showHistory").btn.btn-default.navbar-btn.right
-              span.glyphicon.glyphicon-list
+              span(ng-if="!showHistory").glyphicon.glyphicon-list
+              span(ng-if="showHistory").glyphicon.glyphicon-remove.text-danger
 
       .title-spacer
       div(ng-view).index-view
 
 
     div(history-panel-dir)
+      div()
 
     script(src='require.js')
