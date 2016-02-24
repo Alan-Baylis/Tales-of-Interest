@@ -1,7 +1,7 @@
-div(ng-class="{hidden: !showHistory}").panel.panel-default.history-panel
+div(ng-class="{hidden: !showHistory}").panel.panel-default.panel-dir
   .panel-body
     .page-header
-      h1 History {{t}}
+      h1 History
 
     ul.list-group
       li(ng-repeat="item in historyItems", ng-click="$parent.link(item.path)").list-group-item

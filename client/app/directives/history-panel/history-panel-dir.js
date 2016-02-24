@@ -1,6 +1,6 @@
 'use strict';
 
-require(__dirname + '/history-panel.scss');
+require(__dirname + '/../common.scss');
 require(__dirname + '/history-panel.jade');
 const storyHistory = /**@type {StoryHistory}*/ require('../../services/story-history')();
 
