@@ -1,8 +1,8 @@
 'use strict';
 
+const Searcher = require('./Searcher');
 require(__dirname + '/../common.scss');
 require(__dirname + '/search-panel.jade');
-const storyHistory = /**@type {StoryHistory}*/ require('../../services/story-history')();
 
 /**
  * @param {angular.IModule} app
@@ -13,8 +13,11 @@ module.exports = function(app) {
   function searchPanelDir() {
     return {
       templateUrl: './search-panel.html',
-      link: function() {
+      link: function(scope) {
+        const results = /**@type {Array<String>}*/ [] ;
+        const searcher = new Searcher(results);
 
+        scope.$watch('search', searcher.onTermChange);
       }
     }
   }
