@@ -1,10 +1,12 @@
 'use strict';
 
+const path = require('path');
+
 module.exports = {
-  context: __dirname + '/client',
-  entry: './index.js',
+  context: path.join(__dirname, 'client'),
+  entry: './app.js',
   output: {
-    path: __dirname + '/public',
+    path: path.join(__dirname, 'public'),
     filename: 'require.js'
   },
   module: {
@@ -12,7 +14,7 @@ module.exports = {
       {test: /\.css$/, loader: 'style!css'},
       {test: /\.scss$/, loader: `style!css!sass`},
       {test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.eot$|\.woff2$/, loader: 'file?name=[name].[ext]'},
-      {test: /\.jade/, loader: 'file?name=[name].html!jade-html?pretty'}
+      {test: /\.jade$/, loader: 'file?name=[name].html!jade-html?pretty'}
     ]
   }
 };
