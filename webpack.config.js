@@ -14,7 +14,7 @@ module.exports = {
       {test: /\.css$/, loader: 'style!css'},
       {test: /\.scss$/, loader: `style!css!sass`},
       {test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.eot$|\.woff2$/, loader: 'file?name=[name].[ext]'},
-      {test: /\.jade$/, loader: 'file?name=[name].html!jade-html?pretty'}
+      {test: /index.jade/, loader: 'file?name=[name].html!jade-html?pretty'}
     ]
   }
 };
