@@ -1,3 +1,6 @@
 .input-field
-  input(placeholder="Search").hide-on-small-only
-  input(placeholder="S").hide-on-med-and-up
+  input(placeholder="Search" v-model='search').hide-on-small-only
+  input(placeholder="S" v-model='search').hide-on-med-and-up
+  
+.collection(v-show='showList')
+  a(v-for='result in searchResults').collection-item {{result}}
