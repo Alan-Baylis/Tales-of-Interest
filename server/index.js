@@ -4,15 +4,15 @@ const search = require('./middleware/search');
 const express = require('express');
 const app = express();
 
-app.use('/api/stories', search);
+const PORT = process.env.tal_PORT || 5001;
 
-app.use(express.static(__dirname + '/../public/'));
-
-app.use((req, res) => {
-  console.log(req.originalUrl + ': lead nowhere. Redirecting to index');
-  res.sendFile('public/index.html', {root: __dirname + '/../'});
+app.use('/', (req,res, next) => {
+  console.log(`${new Date().toLocaleString()} - ${req.method} - ${req.url}`);
+  next();
 });
 
-app.listen(5000);
+app.use('/api/search', search);
 
-console.log('Server started on port 5000');
+app.listen(PORT);
+
+console.log(`Server started on port ${PORT}`);
