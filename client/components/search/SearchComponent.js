@@ -1,8 +1,10 @@
 'use strict';
 
+require('./SearchStyle.scss');
 const bluebird = /**@type {Promise}*/ require('bluebird');
 const axios = require('axios');
 const searchRequest = (term) => axios.post('http://me:5001/api/search', {term: term});
+const randStr = () => Math.random().toString(35).slice(-10);
 
 bluebird.config({
   cancellation: true
@@ -13,13 +15,19 @@ module.exports = {
   
   data: () => ({
     search: '',
-    searchResults: []
+    searchResults: [],
+    menuButton: randStr(),
+    slideId: randStr()
   }),
   
   computed: {
     showList: function() {
       return this.searchResults.length !== 0;
     }
+  },
+  
+  ready: function() {
+    $(`#${this.$data.menuButton}`).sideNav();
   },
   
   watch: {

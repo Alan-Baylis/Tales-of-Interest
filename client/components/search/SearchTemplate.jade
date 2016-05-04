@@ -1,6 +1,16 @@
-.input-field
-  input(placeholder="Search" v-model='search').hide-on-small-only
-  input(placeholder="S" v-model='search').hide-on-med-and-up
-  
-.collection(v-show='showList')
-  a(v-for='result in searchResults').collection-item {{result}}
+.search
+  .input-field
+    input(placeholder="Search" v-model='search').hide-on-small-only
+    
+    a(data-activates='{{slideId}}' id='{{menuButton}}').button-collapse.hide-on-med-and-up S
+      
+    
+  .collection.hide-on-small-only(v-show='showList')
+    a(v-for='result in searchResults').collection-item {{result}}
+    
+    
+  ul(id='{{slideId}}').side-nav
+    li
+      input(placeholder="Search" v-model='search')
+    li(v-for='result in searchResults')
+      div {{result}}
