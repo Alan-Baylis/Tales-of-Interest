@@ -3,9 +3,9 @@ DROP TABLE IF EXISTS stories;
 CREATE TABLE stories (
   id SERIAL PRIMARY KEY,
   story TEXT DEFAULT '',
-  meta TEXT DEFAULT '',
-  raw_story TEXT NOT NULL,
   tsv TSVECTOR
 );
 
-CREATE INDEX story_vector_index ON stories USING GIN(tsv) WITH (FASTUPDATE = OFF);
+CREATE INDEX story_tsv ON stories USING GIN(tsv);
+
+CREATE TRIGGER story_tsv_trigger BEFORE INSERT OR UPDATE ON stories FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger(tsv, 'pg_catalog.english', story);
