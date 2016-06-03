@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS stories;
 CREATE TABLE stories (
   id SERIAL PRIMARY KEY,
   story TEXT DEFAULT '',
+  title TEXT NOT NULL,
   tsv TSVECTOR
 );
 
