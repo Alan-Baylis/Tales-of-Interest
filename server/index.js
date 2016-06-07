@@ -1,13 +1,15 @@
 'use strict';
 
-const search = require('./middleware/search');
-const express = require('express');
 const cors = require('cors');
-const app = express();
+const bodyParser = require('body-parser');
+const express = require('express');
+const search = require('./middleware/search');
 
-const PORT = process.env.tal_PORT || 5001;
+const app = express();
+const PORT = process.env.tai_PORT || 5001;
 
 app.use(cors());
+app.use(bodyParser.json());
 
 app.use('/', (req,res, next) => {
   console.log(`${new Date().toLocaleString()} - ${req.method} - ${req.url}`);
