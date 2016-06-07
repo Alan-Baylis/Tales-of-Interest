@@ -4,11 +4,13 @@
     
     a(data-activates='{{slideId}}' id='{{menuButton}}').button-collapse.hide-on-med-and-up S
       
-    
+  
+  //Search results for non-mobile
   .collection.hide-on-small-only(v-show='showList')
     a(v-for='result in searchResults').collection-item {{result}}
     
     
+  //search results for mobile
   ul(id='{{slideId}}').side-nav
     li
       input(placeholder="Search" v-model='search')
