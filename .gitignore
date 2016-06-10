@@ -2,3 +2,4 @@
 node_modules
 public
 conf/db.json
+variables.sh
