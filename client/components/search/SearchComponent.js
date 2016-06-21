@@ -3,7 +3,7 @@
 require('./SearchStyle.scss');
 const bluebird = /**@type {Promise}*/ require('bluebird');
 const axios = require('axios');
-const searchRequest = (term) => axios.post('http://me:5001/api/search', {term: term});
+const searchRequest = (query) => axios.post('http://me:5001/api/search', {query: query});
 const randStr = () => Math.random().toString(35).slice(-10);
 
 bluebird.config({
