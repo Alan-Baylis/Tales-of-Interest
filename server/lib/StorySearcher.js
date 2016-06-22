@@ -126,6 +126,7 @@ class StorySearcher {
     let tsQuery = '';
     
     searchObj.terms.forEach(term => {
+      if(term.term.length === 0) return;
       if(term.quoted) return;
       if(term.required) return and.push(term.term);
       if(term.negated) return not.push(term.term);
@@ -133,9 +134,9 @@ class StorySearcher {
       or.push(term.term);
     });
     
-    if(or.length !== 0) tsQuery += `(${ or.join(' | ') })`;
-    if(and.length !== 0) tsQuery += ` & ${ and.join(' & ') }`;
-    if(not.length !== 0) tsQuery += ` & ! ${ not.join(' & ! ') }`;
+    if(or.length !== 0) tsQuery += `(${ or.join(' | ') }) `;
+    if(and.length !== 0) tsQuery += `${tsQuery.length != 0 ? '& ' : ''} ${ and.join(' & ') } `;
+    if(not.length !== 0) tsQuery += `${tsQuery.length != 0 ? '& ! ' : '!'} ${ not.join(' & ! ') }`;
     
     return tsQuery;
   }
