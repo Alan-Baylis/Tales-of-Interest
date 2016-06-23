@@ -34,15 +34,14 @@ class StorySearcher {
     /**@type {?SearchTerm}*/ let currTerm;
   
     query
-      .replace(/[^A-Za-z0-9\s"+-]/, '')
+      .replace(/[^A-Za-z0-9\s"-]/, '')
       .replace(/\s{2,}/, ' ')
       .split('')
       .forEach(char => {
         if(!currTerm) {
           currTerm = /**@type {SearchTerm}*/ {term: ''};
         
-          if(char === '+') currTerm.required = true;
-          else if(char === '"') currTerm.quoted = true;
+          if(char === '"') currTerm.quoted = true;
           else if(char === '-') currTerm.negated = true;
           else if(char === ' ') return;
           else currTerm.term += char;
@@ -50,7 +49,7 @@ class StorySearcher {
           return terms.push(currTerm);
         }
       
-        if(char === '+' || char === '-') return;
+        if(char === '-') return;
         if(char === ' ' && !currTerm.quoted) return currTerm = null;
         if(char === '"' && currTerm.quoted) return currTerm = null;
       
@@ -121,21 +120,18 @@ class StorySearcher {
    */
   _convertSearchObjToSQL(searchObj) {
     const and = [];
-    const or = [];
     const not = [];
     let tsQuery = '';
     
     searchObj.terms.forEach(term => {
       if(term.term.length === 0) return;
       if(term.quoted) return;
-      if(term.required) return and.push(term.term);
       if(term.negated) return not.push(term.term);
       
-      or.push(term.term);
+      and.push(term.term);
     });
     
-    if(or.length !== 0) tsQuery += `(${ or.join(' | ') }) `;
-    if(and.length !== 0) tsQuery += `${tsQuery.length != 0 ? '& ' : ''} ${ and.join(' & ') } `;
+    if(and.length !== 0) tsQuery += `${ and.join(' & ') } `;
     if(not.length !== 0) tsQuery += `${tsQuery.length != 0 ? '& ! ' : '!'} ${ not.join(' & ! ') }`;
     
     return tsQuery;
@@ -148,7 +144,6 @@ module.exports = StorySearcher;
  @typedef {Object} SearchTerm
  @property {String} term
  @property {Boolean} quoted
- @property {Boolean} required
  @property {Boolean} negated
  */
 
