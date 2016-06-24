@@ -43,7 +43,7 @@ class StorySearcher {
         
           if(char === '"') currTerm.quoted = true;
           else if(char === '-') currTerm.negated = true;
-          else if(char === ' ') return;
+          else if(char === ' ') return currTerm = null;
           else currTerm.term += char;
         
           return terms.push(currTerm);
@@ -80,10 +80,15 @@ class StorySearcher {
    */
   _searchDB(searchObj) {
     let resolve, reject;
+    const storyResults = /**@type {String[]}*/ [];
+    const tsQuery = this._convertSearchObjToSQL(searchObj);
+    const quotedArray = /**@type {String[]}*/ searchObj.terms.filter(term => term.quoted).map(term => `%${term.term}%`);
     const promise = new bluebird((res, rej) => {
       resolve = res;
       reject = rej;
     });
+  
+    console.log(`Converted user query: ${searchObj.query} to ${tsQuery}`);
     
     pg.connect(this.dbConn, (err, client, done) => {
       if(err) {
@@ -91,16 +96,9 @@ class StorySearcher {
         return reject(err);
       }
       
-      const storyResults = /**@type {String[]}*/ [];
-      const tsQuery = this._convertSearchObjToSQL(searchObj);
-      console.log(`Converted user query: ${searchObj.query} to ${tsQuery}`);
-      
-      client.query('SELECT id,title FROM stories WHERE stories.tsv @@ to_tsquery($1) LIMIT 50', [tsQuery], (err, res) => {
-        if(err) {
-          done();
-          return reject(err);
-        }
+      client.query(`SELECT id,title FROM (SELECT * FROM stories WHERE stories.tsv @@ to_tsquery($1)) as stories WHERE stories.story LIKE ALL($2) LIMIT 50`, [tsQuery, quotedArray], (err, res) => {
         done();
+        if(err) return reject(err);
         
         if(res.rowCount === 0) return resolve([]);
         
@@ -125,7 +123,8 @@ class StorySearcher {
     
     searchObj.terms.forEach(term => {
       if(term.term.length === 0) return;
-      if(term.quoted) return;
+      if(term.quoted && !term.negated) return and.push(`'${term.term}'`);
+      if(term.quoted && term.negated) return not.push(`'${term.term}'`);
       if(term.negated) return not.push(term.term);
       
       and.push(term.term);
