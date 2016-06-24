@@ -1,9 +1,11 @@
 'use strict';
 
 const conf = require('../conf');
+const Parrot = require('../lib/Parrot');
 const router = require('express').Router();
 const StorySearcher = require('../lib/StorySearcher');
 
+const parrot = new Parrot('Search Middleware');
 const storySearcher = new StorySearcher(conf.DB_CONN);
 
 router.post('/', (req, res) => {
@@ -11,7 +13,7 @@ router.post('/', (req, res) => {
   
   storySearcher.query(req.body.query, 0)
     .then(ids => {
-      console.log(`For query: ${req.body.query}, got ${ids.length} ids, time taken: ${Date.now() - now}ms`);
+      parrot.log(`For query: ${req.body.query}, got ${ids.length} ids, time taken: ${Date.now() - now}ms`);
   
       res.send(ids);
     });

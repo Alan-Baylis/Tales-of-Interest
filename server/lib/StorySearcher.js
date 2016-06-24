@@ -1,6 +1,7 @@
 'use strict';
 
 const bluebird = /**@type {Promise}*/ require('bluebird');
+const Parrot = require('./Parrot');
 const pg = require('pg');
 
 class StorySearcher {
@@ -9,6 +10,7 @@ class StorySearcher {
    */
   constructor(dbConn) {
     this.dbConn = dbConn;
+    this.parrot = new Parrot('StorySearcher');
   }
   
   /**
@@ -88,7 +90,7 @@ class StorySearcher {
       reject = rej;
     });
   
-    console.log(`Converted user query: ${searchObj.query} to ${tsQuery}`);
+    this.parrot.log(`Converted user query: ${searchObj.query} to ${tsQuery}`);
     
     pg.connect(this.dbConn, (err, client, done) => {
       if(err) {
