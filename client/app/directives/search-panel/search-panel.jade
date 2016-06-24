@@ -1,9 +1,0 @@
-div(ng-class="{hidden: showSearch}").panel.panel-default.panel-dir
-  .panel-body
-    .page-header
-      h1
-        input.form-control(placeholder="Search", ng-model="search")
-
-    ul.list-group
-      li(ng-repeat="item in searchItems", ng-click="$parent.link(item.path)").list-group-item
-        | {{item.subject}}
