@@ -30,6 +30,7 @@
     "style-loader": "~0.13.0",
     "url-loader": "~0.5.7",
     "vue": "~1.0.25",
+    "vue-router": "~0.7.13",
     "webpack": "~1.13.1"
   }
 }

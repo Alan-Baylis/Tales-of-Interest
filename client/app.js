@@ -7,11 +7,14 @@ require('materialize-css/dist/js/materialize.js');
 require('./index.scss');
 
 const vue = require('vue');
+const vueRouter = require('vue-router');
 const SearchComponent = require('./components/search/SearchComponent.js');
 
-new vue({
-  el: '#app',
+vue.use(vueRouter);
+const router = new vueRouter();
+
+router.start({
   components: {
-    'search': SearchComponent
+    search: SearchComponent
   }
-});
+}, '#app');
