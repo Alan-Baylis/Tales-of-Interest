@@ -27,7 +27,7 @@ module.exports = {
   },
   
   ready: function() {
-    $(`#${this.$data.menuButton}`).sideNav();
+    $(`#${this.$data.menuButton}`).sideNav({closeOnClick: true});
   },
   
   watch: {

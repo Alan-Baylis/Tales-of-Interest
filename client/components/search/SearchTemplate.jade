@@ -7,7 +7,7 @@
   
   //Search results for non-mobile
   .collection.hide-on-small-only(v-show='showList')
-    a(v-for='result in searchResults').collection-item {{result.title}}
+    a(v-for='result in searchResults' v-link="'/story/'+result.id" data-activates='{{slideId}}').collection-item {{result.title}}
     
     
   //search results for mobile
@@ -15,4 +15,4 @@
     li
       input(placeholder="Search" v-model='search')
     li(v-for='result in searchResults')
-      div {{result.title}}
+      a(v-link="'/story/'+result.id" data-activates='{{slideId}}') {{result.title}}

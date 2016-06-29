@@ -7,4 +7,9 @@
   li {
     color: black;
   }
+  
+  //fix for material style
+  a {
+    height: inherit;
+  }
 }
