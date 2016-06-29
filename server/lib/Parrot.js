@@ -1,5 +1,7 @@
 'use strict';
 
+const util = require('util');
+
 class Parrot {
   /**
    * @param {String} className
@@ -12,7 +14,7 @@ class Parrot {
    * @param {*} msg
    */
   log(msg) {
-    const msgStr = typeof msg === 'object' ? JSON.stringify(msg) : msg;
+    const msgStr = typeof msg === 'object' ? util.inspect(msg) : msg;
     console.log(`${new Date().toLocaleString()} - ${this.className} - ${msgStr}`);
   }
   
@@ -20,7 +22,7 @@ class Parrot {
    * @param {*} msg
    */
   error(msg) {
-    const msgStr = typeof msg === 'object' ? JSON.stringify(msg) : msg;
+    const msgStr = typeof msg === 'object' ? util.inspect(msg) : msg;
     console.error(`${new Date().toLocaleString()} - ${this.className} - ${msgStr}`);
   }
 }
